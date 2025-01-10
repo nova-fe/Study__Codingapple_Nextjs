@@ -4,6 +4,10 @@
  * 2. 그 안에 page.js 넣기
  * 3. 그 안에 레이아웃 넣기
  */
+
+// import Image from "next/image";
+// import 작명 from '/public/food0.png'
+
 export default function List() {
   let 상품 = ['Tomatoes', 'Pasta', 'Coconut']
   let arr = [2,3,4]
@@ -20,7 +24,11 @@ export default function List() {
       {
         상품.map((a, i) => {
           return (
-            <div className="food">
+            <div className="food" key={i}>
+              <img src={`/food${i}.png`} className="food-img" />
+              
+              {/* <Image src={작명} className="food-img" /> */}
+              {/* <Image src="이미지주소" width={500} height={400} className="food-img" /> */}
               <h4>{a} $40</h4>
             </div>
           )
