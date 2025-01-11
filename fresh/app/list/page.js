@@ -8,15 +8,20 @@
 // import Image from "next/image";
 // import 작명 from '/public/food0.png'
 
+'use client'
+
+import { useState } from "react";
+
 export default function List() {
   let 상품 = ['Tomatoes', 'Pasta', 'Coconut']
-  let arr = [2,3,4]
+  let [수량, 수량변경] = useState(0)
+  // let arr = [2,3,4]
   
-  let b = arr.map((a) => {
-    // return 에 담은걸 array로 담아줌
-    return 10;
-  })
-  console.log(b); // [10,10,10]
+  // let b = arr.map((a) => {
+  //   // return 에 담은걸 array로 담아줌
+  //   return 10;
+  // })
+  // console.log(b); // [10,10,10]
 
   return (
     <div>
@@ -30,6 +35,9 @@ export default function List() {
               {/* <Image src={작명} className="food-img" /> */}
               {/* <Image src="이미지주소" width={500} height={400} className="food-img" /> */}
               <h4>{a} $40</h4>
+              <span>{수량} </span>
+              <button onClick={()=>{수량변경(수량+1)}}>+</button>
+              <button onClick={()=>{수량변경(수량-1)}}>-</button>
             </div>
           )
         })
