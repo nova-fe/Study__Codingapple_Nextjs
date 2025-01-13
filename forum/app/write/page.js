@@ -5,13 +5,12 @@ export default async function Write() {
 
   return (
     <div>
-      {/* 입력폼에 넣을 것: 제목, 내용 */}
       <h4>글작성</h4>
 
-      <form action="/api/write" method="POST">
-        <input name="title" />
-        <input name="content" />
-        <button type="submit">버튼</button>
+      <form action="/api/post/new" method="POST">
+        <input name="title" placeholder="글제목" />
+        <input name="content" placeholder="글내용" />
+        <button type="submit">글 등록</button>
       </form>
     </div>
   );
