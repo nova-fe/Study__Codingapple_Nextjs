@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 .list-bg {
-  background: rgb(249, 250, 255);
+  background: rgb(214, 214, 214);
   padding: 10px;
 }
 .list-item {
@@ -39,4 +39,16 @@ button {
 a {
   text-decoration: none;
   color: black;
+}
+.navbar {
+  background: white;
+  padding: 20px;
+}
+.navbar a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: black;
+}
+.logo {
+  font-weight: bold;
 }

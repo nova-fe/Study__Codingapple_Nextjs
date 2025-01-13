@@ -10,18 +10,16 @@ export default async function handler(요청, 응답) {
 
     try {
       const db = (await connectDB).db("forum");
+      let changeData = {
+        title: 요청.body.title,
+        content: 요청.body.content,
+      };
 
       // 글 수정
       //await db.collection(컬렉션명).updateOne({수정할게시물정보}, { $set : {수정할내용} } );
-      await db.collection("post").updateOne(
-        { _id: new ObjectId(요청.body.id) },
-        {
-          $set: {
-            title: 요청.body.title,
-            content: 요청.body.content,
-          },
-        }
-      );
+      await db
+        .collection("post")
+        .updateOne({ _id: new ObjectId(요청.body.id) }, { $set: changeData });
 
       return 응답.redirect(302, `/detail/${요청.body.id}`); // 성공시 상세 페이지로 이동
     } catch (error) {

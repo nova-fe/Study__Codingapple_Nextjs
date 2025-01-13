@@ -20,7 +20,7 @@ export default async function Edit({ params }) {
       <form action="/api/post/edit" method="POST">
         <input name="title" defaultValue={result.title} />
         <input name="content" defaultValue={result.content} />
-        <input type="hidden" name="id" value={id} />
+        <input type="hidden" name="id" defaultValue={id} />
         <button type="submit">수정</button>
       </form>
     </div>
