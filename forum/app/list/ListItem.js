@@ -13,33 +13,31 @@ export default function ListItem({ result }) {
               </Link>
             </h4>
             <Link href={`/edit/${item._id}`}>✏️</Link>
-            {/* <span onClick={() => {
-              // fetch('/URL', {method: 'HTTP 메서드'})
-              fetch('/api/test', {
-                method: 'HTTP 메서드',
-                // body: 전송할 데이터
-                // => object 나 array 를 전달할땐 꼭 JSON.stringify 를 사용해야함
-                body: JSON.stringify([1,2,3])
-              })
-              .then(() => {
-                // 서버 응답시 실행
-                console.log("fetch 요청 날려줌")
-              })
-            }}>🗑️</span> */}
-
             <span
               style={{
                 cursor: "pointer",
               }}
               onClick={() => {
                 alert("삭제버튼 클릭");
-                fetch("/api/list", {
+                fetch("/api/post/delete", {
                   method: "DELETE",
                   body: item._id,
-                }).then(() => {
-                  // 서버 응답시 실행
-                  alert("삭제완료");
-                });
+                })
+                  .then((r) => {
+                    if (r.status == 200) {
+                      return r.json();
+                    } else {
+                      //서버가 에러코드전송시 실행할코드
+                    }
+                  })
+                  .then((result) => {
+                    //성공시 실행할코드
+                    console.log(result);
+                  })
+                  .catch((error) => {
+                    //인터넷문제 등으로 실패시 실행할코드
+                    console.log(error);
+                  });
               }}
             >
               🗑️
