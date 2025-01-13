@@ -1,6 +1,5 @@
 import { connectDB } from "@/util/database";
 import Link from "next/link";
-import DetailLink from "./DetailLink";
 
 export default async function List() {
   const db = (await connectDB).db("forum");
@@ -16,7 +15,9 @@ export default async function List() {
                 {item.title}
               </Link>
             </h4>
-            <DetailLink />
+
+            <Link href={`/edit/${item._id}`}>✏️수정</Link>
+
             <p>1월 12일</p>
           </div>
         );
