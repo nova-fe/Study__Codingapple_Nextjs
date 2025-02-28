@@ -2,7 +2,6 @@
 import Link from "next/link";
 
 export default function ListItem({ result }) {
-
   return (
     <div>
       {JSON.parse(result).map((item) => {
