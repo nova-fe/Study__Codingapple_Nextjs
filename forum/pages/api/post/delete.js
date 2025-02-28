@@ -9,11 +9,12 @@ export default async function handler(요청, 응답) {
     try {
       let session = await getServerSession(요청, 응답, authOptions);
       const db = (await connectDB).db("forum");
+      console.log(session)
 
       // user의 author이 body 인 것을 찾음
       let target = await db.collection('post').findOne({_id: new ObjectId(요청.body)});
       
-      if(session && target.author === session.user.email) {
+      if(session && (target.author === session.user.email || session.user.role === 'admin')) {
         let result = await db.collection("post").deleteOne({
           _id: new ObjectId(요청.body),
         });
