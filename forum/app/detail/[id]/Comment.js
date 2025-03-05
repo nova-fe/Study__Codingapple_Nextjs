@@ -1,11 +1,5 @@
 'use client'  // DB 출력문법 작성불가
 
-// 3. 글마다 좋아요 기능을 만들고 싶은데 
-// (조건) 유저는 같은 글에 중복해서 좋아요를 누를 수 없어야합니다.
-// 그러려면 좋아요누른 사람의 _id같은 것도 기록해둬야하겠군요. 
-// 그럼 좋아요 누른 갯수와 좋아요 누른 사람들을 DB에 어디에 어떻게 기록해야 좋을지 한번 생각해봅시다.
-// post 각각에, 좋아요 갯수, 해당 게시글에 like 한 사람 각각 저장
-
 import { useEffect, useState } from "react"
 
 export default function Comment(props) {
