@@ -5,6 +5,7 @@ import LoginButton from "./LoginButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import LogoutButton from "./LogoutButton";
+import { cookies } from 'next/headers';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,17 +24,10 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions);  // 현재 로그인된 유저이름, 이메일 등이 남음
-  // console.log(session);
 
-  /** console 결과
-   * {
-        user: {
-          name: 'Nova',
-          email: 'heetask@gmail.com',
-          image: 'https://avatars.githubusercontent.com/u/56466589?v=4'
-        }
-      }
-   */
+  // 쿠키 값을 비동기적으로 가져오기
+  let cookieValue = await cookies().get('name');
+  console.log(cookieValue);  // 쿠키값 출력
 
   return (
     <html lang="en">
