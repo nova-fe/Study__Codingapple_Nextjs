@@ -20,32 +20,4 @@ export default async function handler(요청, 응답) {
       console.error(error.message);
     }
   }
-
-  if (요청.method == "POST") {
-    try {
-      const result = await db.collection("post").findOne({
-        _id: new ObjectId(요청.query)
-      });
-      console.log(요청.likeCount);
-
-      // $pull: 배열에서 특정 값을 제거
-      // $push: 배열에서 특정 값을 추가
-      // $set: 배열에서 특정 값을 업데이트
-      await db
-      .collection("post")
-      .updateOne({_id: new ObjectId(요청.query)}, {
-        $set: {
-          likeCount: 요청.body.likeCount,
-          likeUserId: ['test1', 'test2'],
-        }})
-      // console.log(요청.query.postId); // URL 파라미터 문법으로 불러온 값 // {'어쩌구' : 'kim'}
-
-      // await db.collection("post").findOne({
-      //   _id: new ObjectId(요청.query.postId)
-      // })
-      응답.status(200).json("좋아요 수정 완료");
-    } catch (error) {
-      console.log("수정 에러"+ error.message);
-    }
-  }
 }
