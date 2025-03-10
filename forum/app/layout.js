@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import LogoutButton from "./LogoutButton";
 import { cookies } from 'next/headers';
+import DarkMode from "./DarkMode";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,14 +26,14 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   let session = await getServerSession(authOptions);  // 현재 로그인된 유저이름, 이메일 등이 남음
 
-  // 쿠키 값을 비동기적으로 가져오기
-  let cookieValue = await cookies().get('name');
+  // 쿠키 값을 비동기적으로 가져오기 .get('쿠키이름')
+  let cookieValue = await cookies().get('mode');
   console.log(cookieValue);  // 쿠키값 출력
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="navbar">
+      <body className={`${geistSans.variable} ${geistMono.variable} ${cookieValue != undefined && cookieValue.value === 'dark' ? 'dark-mode' : ''}`}>
+        <div className="navbar" style={{}}>
           <Link href="/" className="logo">
             Appleforum
           </Link>
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }) {
           {/* JSX 안에서 if문을 쓰고싶으면 삼항연산자 사용 */
             session ? <div>{session.user.name} <LogoutButton/></div> : <LoginButton />
           }
+          <DarkMode />
         </div>
         {children}
       </body>
