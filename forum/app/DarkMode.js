@@ -12,23 +12,25 @@ import { useState, useEffect } from "react"
 
 export default function DarkMode() {
   const router = useRouter();
-  const [modeCookie, setModeCookie] = useState('light');
   const 쿠키값 = ('; '+document.cookie).split(`; mode=`).pop().split(';')[0];
+  const [modeCookie, setModeCookie] = useState(쿠키값);
 
   useEffect (() => {
     if (쿠키값 === '') { // mode 라는 이름의 쿠키가 없으면 쿠키값 설정
       document.cookie = `mode=${modeCookie}; max-age= ${(3600 * 24 * 400)}`;
+      setModeCookie('light');
     }
   }, []);
 
   return (
     <span onClick={() => {
-      modeCookie === 'light' ? setModeCookie('dark') : setModeCookie("light");
-      document.cookie = `mode=${modeCookie}; max-age= ${(3600 * 24 * 400)}`;
+      const newMode = modeCookie === 'light' ? 'dark' : 'light';
+      document.cookie = `mode=${newMode}; max-age= ${(3600 * 24 * 400)}`;
+      setModeCookie(newMode);
       // 새로고침
       router.refresh();
     }}>
-      {modeCookie === 'dark' ? '🌙' : '☀️'}
+      {쿠키값 === 'dark' ? '☀️' : '🌙'}
     </span>
   )
 };
